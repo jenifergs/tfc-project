@@ -4,6 +4,7 @@ USE `TRYBE_FUTEBOL_CLUBE`;
 --
 -- Table structure for table `teams`
 --
+--
 
 DROP TABLE IF EXISTS `teams`;
 
