@@ -10,4 +10,9 @@ TeamsRouter.get(
   '/teams',
   teams.getTeams.bind(teams),
 );
+
+TeamsRouter.get(
+  '/teams/:id',
+  teams.getTeamById.bind(teams),
+);
 export default TeamsRouter;
