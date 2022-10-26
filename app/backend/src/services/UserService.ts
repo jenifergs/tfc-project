@@ -9,7 +9,7 @@ export default class UserService {
     this.jwtUtil = jwtUtil;
   }
 
-  login = async (email: string, password: string) => {
+  async login(email: string, password: string) {
     // https://stackoverflow.com/questions/21961818/sequelize-convert-entity-to-plain-object
     const user = await Users.findOne({ where: { email }, raw: true, nest: true });
 
@@ -19,5 +19,10 @@ export default class UserService {
 
     const token = this.jwtUtil.generateToken(user);
     return token;
-  };
+  }
+
+  async validateToken(token: string) {
+    const user = await this.jwtUtil.validateToken(token);
+    return user.role;
+  }
 }
