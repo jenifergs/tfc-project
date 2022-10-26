@@ -16,8 +16,6 @@ export default class UserController {
     console.log('password', password);
 
     try {
-      console.log('PPPPP', this.service.login);
-
       const token = await this.service.login(email, password);
       return res.status(200).json({ token });
     } catch (error) {
