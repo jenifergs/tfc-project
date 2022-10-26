@@ -9,6 +9,8 @@ export default class JwtUtil implements Token {
   }
 
   generateToken(payload: object) {
+    console.log('payload', payload);
+
     return sign(payload, this.secret, { expiresIn: '12h' });
   }
 }

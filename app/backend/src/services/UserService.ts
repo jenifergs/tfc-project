@@ -1,4 +1,4 @@
-import { compare } from 'bcryptjs';
+import { compareSync } from 'bcryptjs';
 import Users from '../database/models/Users';
 import Token from '../interfaces/Token';
 
@@ -10,8 +10,10 @@ export default class UserService {
   }
 
   login = async (email: string, password: string) => {
-    const user = await Users.findOne({ where: { email } });
-    if (!user || !await compare(password, user.password)) {
+    // https://stackoverflow.com/questions/21961818/sequelize-convert-entity-to-plain-object
+    const user = await Users.findOne({ where: { email }, raw: true, nest: true });
+
+    if (!user || !compareSync(password, user.password)) {
       throw new Error('Incorrect email or password');
     }
 
