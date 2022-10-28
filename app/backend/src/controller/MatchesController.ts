@@ -46,5 +46,16 @@ class MatchesController {
       return res.status(400).json({ message: erroMapeado.message });
     }
   }
+
+  updateMatch(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    if (!id || !homeTeamGoals || !awayTeamGoals) {
+      return res.status(400).json({ message: 'All fields must be filled' });
+    }
+    this.service.updateMatch(Number(id), homeTeamGoals, awayTeamGoals);
+    return res.status(200).json({ message: 'Updated' });
+  }
 }
 export default MatchesController;

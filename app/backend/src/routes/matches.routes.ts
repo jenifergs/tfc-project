@@ -25,4 +25,9 @@ matchRouter.patch(
   matches.finishMatch.bind(matches),
 );
 
+matchRouter.patch(
+  '/matches/:id',
+  matches.updateMatch.bind(matches),
+);
+
 export default matchRouter;

@@ -64,6 +64,17 @@ class MatchService {
       throw new Error('Match not found');
     }
   };
+
+  updateMatch = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    const match = await Match.update({
+      homeTeamGoals,
+      awayTeamGoals,
+    }, {
+      where: { id },
+    });
+
+    return match;
+  };
 }
 
 export default MatchService;
