@@ -32,6 +32,34 @@ class MatchService {
     raw: true,
     nest: true,
   });
+
+  createMatch = async (
+    homeTeam: number,
+    awayTeam: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ) => {
+    const match = await Match.create({
+      homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals,
+      inProgress: true,
+    });
+    return match;
+  };
+
+  finishMatch = async (id: number) => {
+    const match = await Match.findOne({ where: { id } });
+    if (match) {
+      match.inProgress = false;
+      await match.save();
+      return match;
+    }
+    if (!match) {
+      throw new Error('Match not found');
+    }
+  };
 }
 
 export default MatchService;
