@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import validatedToken from '../middlewares/validatedToken';
 import MatchesController from '../controller/MatchesController';
+import validatedTeam from '../middlewares/validatedTeam';
 
 const matchRouter = Router();
 const matches = new MatchesController();
@@ -15,6 +16,7 @@ matchRouter.get(
 matchRouter.post(
   '/matches',
   validatedToken,
+  validatedTeam,
   matches.createMatch.bind(matches),
 );
 
