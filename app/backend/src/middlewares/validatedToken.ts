@@ -6,9 +6,11 @@ const validatedToken = async (req: Request, res: Response, next: NextFunction) =
   const { authorization } = req.headers;
 
   if (!authorization) {
-    return res.status(401).json({ message: 'Token not found' });
+    return res.status(401).json({ message: 'Token must be a valid token' });
   }
-  if (!await validated.validateToken(authorization)) {
+  try {
+    await validated.validateToken(authorization);
+  } catch (error) {
     return res.status(401).json({ message: 'Token must be a valid token' });
   }
   next();
