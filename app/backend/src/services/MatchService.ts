@@ -14,7 +14,24 @@ class MatchService {
       attributes: { exclude: ['id'] },
     }],
     raw: true,
-    nest: true });
+    nest: true,
+  });
+
+  getMatchesInProgress = async (inProgress: string) => Match.findAll({
+    where: { inProgress: inProgress === 'true' },
+    include: [{
+      model: Teams,
+      as: 'teamHome',
+      attributes: { exclude: ['id'] },
+    },
+    {
+      model: Teams,
+      as: 'teamAway',
+      attributes: { exclude: ['id'] },
+    }],
+    raw: true,
+    nest: true,
+  });
 }
 
 export default MatchService;
