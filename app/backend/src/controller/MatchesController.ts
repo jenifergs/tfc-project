@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import ErrorUtil from '../utils/errorUtil';
 import MatchService from '../services/MatchService';
 
 class MatchesController {
@@ -20,13 +21,15 @@ class MatchesController {
 
   async createMatch(req: Request, res: Response) {
     const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
-    if (!homeTeam || !awayTeam || !homeTeamGoals || !awayTeamGoals) {
-      return res.status(400).json({ message: 'All fields must be filled' });
-    }
 
-    const match = await this.service
-      .createMatch(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
-    return res.status(201).json(match);
+    try {
+      const match = await this.service
+        .createMatch(homeTeam, awayTeam, homeTeamGoals, awayTeamGoals);
+      return res.status(201).json(match);
+    } catch (error) {
+      const erroMapeado = error as ErrorUtil;
+      return res.status(erroMapeado.code).json({ message: erroMapeado.message });
+    }
   }
 
   async finishMatch(req: Request, res: Response) {

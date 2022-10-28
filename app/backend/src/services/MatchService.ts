@@ -1,3 +1,4 @@
+import ErrorUtil from '../utils/errorUtil';
 import Match from '../database/models/Match';
 import Teams from '../database/models/Teams';
 
@@ -39,6 +40,9 @@ class MatchService {
     homeTeamGoals: number,
     awayTeamGoals: number,
   ) => {
+    const findHome = await Teams.findOne({ where: { id: homeTeam }, raw: true, nest: true });
+    const findAway = await Teams.findOne({ where: { id: awayTeam }, raw: true, nest: true });
+    if (!findHome || !findAway) throw new ErrorUtil('There is no team with such id!', 404);
     const match = await Match.create({
       homeTeam,
       awayTeam,
