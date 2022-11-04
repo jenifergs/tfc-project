@@ -1,60 +1,50 @@
-// import * as sinon from 'sinon';
-// import * as chai from 'chai';
-// // @ts-ignore
-// import chaiHttp = require('chai-http');
+import * as sinon from 'sinon';
+import * as chai from 'chai';
+// @ts-ignore
+import chaiHttp = require('chai-http');
+import { app } from '../app';
+import Users from '../database/models/Users';
+import { mockLogin } from './mock.login';
 
-// import { app } from '../app';
-// import  User  from '../database/models/Users';
-// import UserController from '../controller/UserController';
-// import UserService from '../services/UserService';
+chai.use(chaiHttp);
 
+const { expect } = chai;
 
-// import { Response } from 'superagent';
+describe('Testando rota de "/login"', () => {
+  afterEach(() => {
+    sinon.restore();
+  });
 
-// chai.use(chaiHttp);
+  it('Verifica se efetua login com sucesso', async () => {
+    sinon.stub(Users, 'findOne').resolves(mockLogin as Users)
 
-// const { expect } = chai;
+    const httpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send({ email: 'admin@admin.com', password: 'secret_admin' })
 
-// describe('Seu teste', () => {
-//   let service: UserService;
-//   let controller: UserController;
-//   beforeEach(() => {
-//     service = { login: sinon.stub(), validateToken: sinon.stub() }as unknown as UserService;
-//     controller = new UserController(service);
-//     });
+    expect(httpResponse.status).to.equal(200)
+    expect(httpResponse.body).to.have.any.keys('token')
+  })
 
-//   it('Deve retornar 200', async () => {
-//     const req = { body: { email: 'teste@teste.com', password: '123456' } };
-//     const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-//     controller.loginUser(req, res as unknown as Response);
-//   });
-//   /**
-//    * Exemplo do uso de stubs com tipos
-//    */
+  it('Verifica se não é possível efetuar um Login sem um Email', async () => {
+    const httpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send({ password: 'secret_admin' })
 
-//   // let chaiHttpResponse: Response;
+      expect(httpResponse.status).to.equal(400)
+      expect(httpResponse.body).to.be.deep.equal({ message: 'All fields must be filled' })
+  })
 
-//   // before(async () => {
-//   //   sinon
-//   //     .stub(Example, "findOne")
-//   //     .resolves({
-//   //       ...<Seu mock>
-//   //     } as Example);
-//   // });
+  it('Verifica se não é possível efetuar um Login sem um Password', async () => {
+    const httpResponse = await chai
+      .request(app)
+      .post('/login')
+      .send({ email: 'admin@admin.com' })
 
-//   // after(()=>{
-//   //   (Example.findOne as sinon.SinonStub).restore();
-//   // })
+      expect(httpResponse.status).to.equal(400)
+      expect(httpResponse.body).to.be.deep.equal({ message: 'All fields must be filled' })
+  })
 
-//   // it('...', async () => {
-//   //   chaiHttpResponse = await chai
-//   //      .request(app)
-//   //      ...
-
-//   //   expect(...)
-//   // });
-
-//   it('Seu sub-teste', () => {
-//     expect(false).to.be.eq(true);
-//   });
-// });
+})
