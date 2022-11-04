@@ -1,45 +1,60 @@
-import * as sinon from 'sinon';
-import * as chai from 'chai';
-// @ts-ignore
-import chaiHttp = require('chai-http');
+// import * as sinon from 'sinon';
+// import * as chai from 'chai';
+// // @ts-ignore
+// import chaiHttp = require('chai-http');
 
-import { app } from '../app';
-import Example from '../database/models/ExampleModel';
+// import { app } from '../app';
+// import  User  from '../database/models/Users';
+// import UserController from '../controller/UserController';
+// import UserService from '../services/UserService';
 
-import { Response } from 'superagent';
 
-chai.use(chaiHttp);
+// import { Response } from 'superagent';
 
-const { expect } = chai;
+// chai.use(chaiHttp);
 
-describe('Seu teste', () => {
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
+// const { expect } = chai;
 
-  // let chaiHttpResponse: Response;
+// describe('Seu teste', () => {
+//   let service: UserService;
+//   let controller: UserController;
+//   beforeEach(() => {
+//     service = { login: sinon.stub(), validateToken: sinon.stub() }as unknown as UserService;
+//     controller = new UserController(service);
+//     });
 
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
+//   it('Deve retornar 200', async () => {
+//     const req = { body: { email: 'teste@teste.com', password: '123456' } };
+//     const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+//     controller.loginUser(req, res as unknown as Response);
+//   });
+//   /**
+//    * Exemplo do uso de stubs com tipos
+//    */
 
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
+//   // let chaiHttpResponse: Response;
 
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
+//   // before(async () => {
+//   //   sinon
+//   //     .stub(Example, "findOne")
+//   //     .resolves({
+//   //       ...<Seu mock>
+//   //     } as Example);
+//   // });
 
-  //   expect(...)
-  // });
+//   // after(()=>{
+//   //   (Example.findOne as sinon.SinonStub).restore();
+//   // })
 
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
-  });
-});
+//   // it('...', async () => {
+//   //   chaiHttpResponse = await chai
+//   //      .request(app)
+//   //      ...
+
+//   //   expect(...)
+//   // });
+
+//   it('Seu sub-teste', () => {
+//     expect(false).to.be.eq(true);
+//   });
+// });

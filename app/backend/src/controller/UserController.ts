@@ -6,8 +6,8 @@ import JwtUtil from '../utils/JwtUtil';
 export default class UserController {
   public service: UserService;
 
-  constructor() {
-    this.service = new UserService(new JwtUtil());
+  constructor(service?: UserService) {
+    this.service = service || new UserService(new JwtUtil());
   }
 
   async loginUser(req: Request<Login>, res: Response) {

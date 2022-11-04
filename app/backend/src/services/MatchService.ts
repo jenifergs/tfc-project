@@ -70,7 +70,7 @@ class MatchService {
       homeTeamGoals,
       awayTeamGoals,
     }, {
-      where: { id },
+      where: { id, inProgress: true },
     });
 
     return match;
