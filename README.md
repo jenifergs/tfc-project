@@ -24,3 +24,28 @@ Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua cr
 
 </details>
 
+<details>
+<summary><strong> Estrutura do projeto</strong></summary><br />
+
+O projeto é composto de 4 entidades importantes para sua estrutura:
+
+1️⃣ **Banco de dados:**
+  - Será um container docker MySQL já configurado no docker-compose através de um serviço definido como `db`.
+  - Tem o papel de fornecer dados para o serviço de _backend_.
+  - Durante a execução dos testes sempre vai ser acessado pelo `sequelize` e via porta `3002` do `localhost`;
+  - Você também pode conectar a um Cliente MySQL (Workbench, Beekeeper, DBeaver e etc), colocando as credenciais configuradas no docker-compose no serviço `db`.
+
+2️⃣ **Back-end:**
+ - Ambiente no qual eu desenvolvi todas as lógicas e implementações exigidas para que meu backend funcionasse corretamente.
+ - Deve rodar na porta `3001`, pois o front-end faz requisições para ele nessa porta por padrão;
+ - A aplicação deve ser inicializada a partir do arquivo `app/backend/src/server.ts`;
+
+3️⃣ **Front-end:**
+  - O front já está concluído e foi fornecido pela TRYBE, não é necessário realizar modificações no mesmo. A única exceção é que foi configurado o Dockerfile.
+
+4️⃣ **Docker:**
+  - O `docker-compose` tem a responsabilidade de unir todos os serviços conteinerizados (backend, frontend e db) e subir o projeto completo com o comando `npm run compose:up` ou `npm run compose:up:dev`;
+
+
+</details>
+
