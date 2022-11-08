@@ -45,7 +45,13 @@ O projeto é composto de 4 entidades importantes para sua estrutura:
 
 4️⃣ **Docker:**
   - O `docker-compose` tem a responsabilidade de unir todos os serviços conteinerizados (backend, frontend e db) e subir o projeto completo com o comando `npm run compose:up` ou `npm run compose:up:dev`;
+</details>
 
+<details id='Criptografia-de-senhas'>
+<summary><strong>🔐 Criptografia de senhas </strong></summary><br />
+
+⚠️ A biblioteca utilizada para criptografar a senha no banco de dados é a `bcryptjs` [bcryptjs npm]
 
 </details>
+
 
